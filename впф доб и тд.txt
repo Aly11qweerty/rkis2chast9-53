@@ -1,0 +1,62 @@
+2. Добавляем приватное статичное поле, которое будет контекстом
+
+context;
+
+3. Добавляем метод получения экземпляра этого контекста
+
+if (_context == null)
+_context = new ToursBaseEntities();
+
+return _context;
+
+4. Для отображения данных открываем страницу HotelPage.xaml
+5. Размечаем Grid на две части
+  
+<Grid.Row
+
+<RowDefinition Height="377*"/>
+<RowDefinition Height="73*"/>
+
+
+ <DataGrid x:Name="DGridHotels"></DataGrid>
+
+6. Cписок данных выводится по столбцам, которые прописывает разработчик. Устанавливаем их с помощью свойства DataGrid.Columns, которое и описывает набор столбцов.
+DataGridTextColumn для текстовых столбцов
+DataGridTemplateColumn для более сложного представления данных, например, кнопки
+
+
+
+<DataGrid.Columns>
+        <DataGridTextColumn Header="Название отеля" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+        <DataGridTextColumn Header="Количество звезд" Binding="{Binding CountOfStars}" Width="150"></DataGridTextColumn>
+        <DataGridTextColumn Header="Страна" Binding="{Binding Country.Name}" Width="250"></DataGridTextColumn>
+        <DataGridTemplateColumn Width="auto">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Button Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
+                </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+    </DataGrid.Columns>
+
+
+
+10. Также добавим кнопки для добавления и удаления во второй строке сетки. Дадим им имена и обработаем нажатия
+
+
+<Button Content="Добавить" Grid.Row="1" HorizontalAlignment="Left" Name="BtnAdd_Click"></Button>
+    <Button Content="Удалить" Grid.Row="1" HorizontalAlignment="Right" Name="BtnDelete_Click"></Button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
